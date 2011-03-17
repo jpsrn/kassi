@@ -4,7 +4,8 @@
 #browse_page.grid_24
   .grid_6.alpha
     %h1= t(".#{@title}s")
-    #left_link_panel_browse
+
+    #left_link_panel_browse   
       .left_panel_section
         .left_panel_title
           %h3= t(".category")
@@ -20,6 +21,13 @@
     .grid_10.alpha
       #search_form_spacer
         &nbsp;
+      
+      #map_view_selector    
+        .grid_3
+          = link_to t(".map_view")
+        .grid_3
+          = link_to t(".list_view")
+
     .grid_8.omega
       #new_listing_links
         = t(".did_not_found_what_you_were_looking_for")
@@ -28,7 +36,10 @@
         = t(".you_have_something_others_do_not")
         = link_to t(".offer_something"), new_request_path(:type => "offer")
     .clear
+
     #browse_view_spacer
       &nbsp;
     #search_results
       = render :partial => "listed_listings"
+    #map_view_selector
+      = render :partial => "map_view/map_view"

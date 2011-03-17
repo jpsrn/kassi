@@ -1,0 +1,2 @@
+class MapViewController < ApplicationController
+end
