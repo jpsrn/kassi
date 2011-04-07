@@ -36,6 +36,7 @@ class Listing < ActiveRecord::Base
   
   VALID_TYPES = ["offer", "request"]
   VALID_CATEGORIES = ["item", "favor", "rideshare", "housing"]
+  VALID_LOCATIONS = ["with_location", "nearby"] 
   VALID_SHARE_TYPES = {
     "offer" => {
       "item" => ["lend", "sell", "rent_out", "trade", "give_away"],

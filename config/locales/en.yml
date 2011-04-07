@@ -286,6 +286,8 @@ en:
       offers: "Offers"
       category: "Category"      
       all_categories: "All categories"
+      location: "Location"
+      all_locations: "All locations"
       request_type: "Request type"
       offer_type: "Offer type"
       all_request_types: "All request types"
@@ -326,7 +328,9 @@ en:
       temporary_accommodations: "Temporary accommodation"
       buys: "Buying"
       borrows: "Borrowing"
-      rents: "Renting"   
+      rents: "Renting"
+      with_locations: "With location"
+      nearbys: "Nearby"
     form:
       form_content:
         request_something: "Request something"
