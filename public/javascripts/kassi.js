@@ -485,6 +485,18 @@ function reload_browse_view(link, listing_type, listing_style, locale) {
                        reload_browse_view($(this), listing_type, listing_style, locale);
                }
        );
+       $('#ajaxmap').find('a').click(
+               function() {
+                       if (listing_style == 'listing') {
+                       		$("#search_results").html('<div id="loader"><img src="/images/load.gif" title="load" alt="loading more results" style="margin: 10px auto" /></div>');
+                       }
+                       var request_path = '/' + locale + '/loadmap'
+                        $.get(request_path, function(data) {
+                            //alert("success on jquery get");
+                            //$('#map_canvas').html(data);
+                        });
+               }
+       );
 }
 
 function initialize_profile_view(badges) {
@@ -851,4 +863,6 @@ function address_not_found(field){
 	//alert(field);
 	//alert(field.value);
 }
-
+function testing123(){
+    alert("damn!");
+}

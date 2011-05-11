@@ -21,8 +21,8 @@
       #search_form_spacer
         &nbsp;
         
-      .tabs.grid_9.alpha 
-        .tabs.grid_9.alpha 
+      .tabs.grid_18.alpha
+        .tabs.grid_12.alpha
           #inbox_tabs
             %div{:class => get_map_tab_class(params[:listing_type]+ "s")} 
               - if params[:listing_type] == "request"
@@ -34,6 +34,12 @@
                 = link_to t(".map_view"), requests_on_map_path, :name => "map_view"
               - else
                 = link_to t(".map_view"), offers_on_map_path, :name => "map_view"
+            %div{:class => "inbox_tab_unselected", :id => "ajaxmap"}
+              - if params[:listing_type] == "request" 
+                = link_to t(".test_map"), "#"
+              - else
+                = link_to t(".test_map"), "#"
+
         
         .grid_3.omega
                           
@@ -52,4 +58,6 @@
         = render :partial => "listed_listings"
       - else
         = render :partial => "listings_on_map"
+
+        
       

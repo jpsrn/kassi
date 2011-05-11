@@ -53,12 +53,13 @@ class ListingsController < ApplicationController
   end 
   
   def loadmap
-    @title = params[:listing_type]
-    @listings = Listing.open.order("created_at DESC").find_with(params, @current_user)
-    @listing_style = "map"
-    @to_render ||= {:partial => "listings/listings_on_map"}
-    @request_path = request.fullpath
-    render  @to_render
+   # @to_render ||= {:partial => "listings/dummy_partial"}
+   # render  @to_render
+    respond_to do |format|
+   #   format.html
+      format.js {render :layout => false}
+   end
+   #render :layout => false
   end
 
   # The following two are simple dummy implementations duplicating the

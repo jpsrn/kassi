@@ -296,6 +296,7 @@ en:
       housing: "Housing"
       list_view: "List view"
       map_view: "Map view"
+      test_map: "Test map"
       search_verb: "Search"
       did_not_found_what_you_were_looking_for: "Didn't find what you need?"
       request_something: "Request something!"
