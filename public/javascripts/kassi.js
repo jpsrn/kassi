@@ -494,7 +494,6 @@ function reload_browse_view(link, listing_type, listing_style, locale) {
 	});
         
 	if (listing_style == "map")
-		//var request_path = '/' + locale + '/loadmap'
 		filtersUpdated(sections['categories'], sections['sharetypes']);
 	else {
 		var request_path = '/' + locale + '/load'
@@ -504,40 +503,43 @@ function reload_browse_view(link, listing_type, listing_style, locale) {
 	}
 }
 
- /* Global variable for listing style state  */
+ /* Global variable for keeping the listing style state (map||listing)  */
  var listing_type;
- var listing_style;
-
-
+ var listing_style = "listing";
  
  function initialize_browse_view(listingtype, listingstyle, locale) {
        listing_type = listingtype;
-       listing_style = listingstyle;
+
        $('#left_link_panel_browse').find('a').click(
                function() {
                        if (listing_style == 'listing') {
                        		$("#search_results").html('<div id="loader"><img src="/images/load.gif" title="load" alt="loading more results" style="margin: 10px auto" /></div>');
                        }
+                       alert("filter change event, style:" + listing_style);
                        reload_browse_view($(this), listing_type, listing_style, locale);
                }
        );
        $('#ajaxmap').find('a').click(
                function() {
+                        alert("ajax map load event, style:" + listing_style);
                        var request_path = '/' + locale + '/loadmap'
                         $.get(request_path, function(data) {
                            //whatever;
                         });
                         handle_selected_tabs($(this));
+                        listing_style = "map";
                }
        );
        $('#ajaxlist').find('a').click(
                function() {
+                       alert("ajax list load event, style:" + listing_style);
                        var request_array = make_request_array($(this));
                        var request_path = '/' + locale + '/load'
                         $.get(request_path, {listing_type: listing_type, 'category[]': request_array['categories'], 'share_type[]': request_array['sharetypes']}, function(data) {
                           $('#search_results').html(data);
                         });
                         handle_selected_tabs($(this));
+                        listing_style = "listing";
                        
                }
        );

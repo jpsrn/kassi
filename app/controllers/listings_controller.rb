@@ -41,6 +41,7 @@ class ListingsController < ApplicationController
   # How the results are rendered depends on 
   # the type of request and if @to_render is set
   def load
+    @listing_style = "listing"
     @title = params[:listing_type]
     @to_render ||= {:partial => "listings/listed_listings"}
     @listings = Listing.open.order("created_at DESC").find_with(params, @current_user).paginate(:per_page => 15, :page => params[:page])
@@ -52,6 +53,7 @@ class ListingsController < ApplicationController
     end
   end 
   
+  # This function renders the map through AJAX request
   def loadmap
     @listing_style = "map"
     respond_to do |format|
@@ -59,34 +61,10 @@ class ListingsController < ApplicationController
    end
   end
 
-  def loadlist
-    @listing_style = "listing"
-    respond_to do |format|
-      format.js {render :layout => false}
-   end
-  end
-
-  # The following two are simple dummy implementations duplicating the
-  # functionality of normal listing methods.
-  # currently not in use
-  def requests_on_map
-    params[:listing_type] = "request"
-    @to_render = {:action => :index}
-    @listings = Listing.open.order("created_at DESC").find_with(params, @current_user)
-    @listing_style = "map"
-    load
-  end
-
-  def offers_on_map
-    params[:listing_type] = "offer"
-    @to_render = {:action => :index}
-    @listing_style = "map"
-    load
-  end
-  
   
   # A (stub) method for serving M data (with locations) as JSON through AJAX-requests.
   def serve_listing_data
+    @listing_style = map
     unless params.has_key?(:bounds_sw) && params.has_key?(:bounds_ne) then
       # Send error JSON-message; these params are required
       render :json => { :errors => ["Parameters missing! bounds_sw and bounds_ne are required"]}
@@ -100,20 +78,7 @@ class ListingsController < ApplicationController
                 where('locations.latitude <= ? AND locations.longitude <= ? AND locations.latitude >= ? AND locations.longitude >= ?', 
                 bound_ne_lat, bound_ne_lng, bound_sw_lat, bound_sw_lng).
                 order("created_at DESC").find_with(params, @current_user)
-    
-    # This has not yet been implemented
-    #@locations ={:data => [{:title => "Item1", :category => "item", :type => ["borrowing","buying"], :listing_type => "offer", :description => "description", :lat => 60.1796, :lng => 24.8004, :date => "2 hours ago"},
-     #                      {:title => "Item2", :category => "item", :type => ["borrowing","buying"], :listing_type => "offer", :description => "description", :lat => 60.236744, :lng => 25.037842, :date => "2 hours ago"},
-     #                      {:title => "Rideshare1", :category => "rideshare", :type => [], :listing_type => "request", :description => "description", :lat => 60.1946, :lng => 24.7928, :latdest => 60.302124, :lngdest => 25.039902, :date => "2 days ago"},
-     #                      {:title => "Rideshare2", :category => "rideshare", :type => [], :listing_type => "request", :description => "Espoo - Helsinki", :lat => 60.220037, :lng => 24.656067, :latdest => 60.176014, :lngdest => 24.941025, :date => "3 days ago"},
-     #                      {:title => "Housing1", :category => "housing", :type => ["renting out"], :listing_type => "offer", :description => "description", :lat => 60.1805, :lng => 24.8502, :date => "4 days ago"}, 
-     #                      {:title => "Favor1", :category => "favor", :type => [], :listing_type => "request", :description => "description", :lat => 60.1636, :lng => 24.8066, :date => "4 hours ago"}, 
-     #                      {:title => "Item3", :category => "item", :type => ["trading"], :listing_type => "request", :description => "description", :lat => 60.1980, :lng => 24.8742, :date => "20 hours ago"},
-     #                      {:title => "Housing2", :category => "housing", :type => ["renting"], :listing_type => "request", :description => "description", :lat => 60.1950, :lng => 24.8422, :date => "3 hours ago"},
-     #                      {:title => "Favor2", :category => "favor", :type => [], :listing_type => "request", :description => "description", :lat => 60.1950, :lng => 24.8422, :date => "5 hours ago"},
-     #                      {:title => "Rideshare3", :category => "rideshare", :type => [], :listing_type => "request", :description => "X - Y", :lat => 60.1950, :lng => 24.8422, :latdest => 60.302124, :lngdest => 25.039902, :date => "3 days ago"},
-     #                      {:title => "Item4", :category => "item", :type => ["buying"], :listing_type => "request", :description => "description", :lat => 60.1950, :lng => 24.8422, :date => "22 hours ago"}], :errors => []}
-    #render :json => @locations
+
     @render_array = [];
     @listings.each do |listing|
       @render_array[@render_array.length] = render_to_string :partial => "homepage/recent_listing", :locals => {:listing => listing}

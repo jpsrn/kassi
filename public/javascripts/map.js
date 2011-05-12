@@ -9,7 +9,6 @@
     var helsinki;
     var browserSupportFlag =  new Boolean();
     var markersArr = [];   // Array for keeping track of markers on map
-    var listing_style;
     var listing_category = ["all"];
     var listing_sharetypes = ["all"];
 
@@ -168,10 +167,11 @@
 
     // Simple callback for passing filter changes to the mapview
     function filtersUpdated(category, sharetypes) {
+        alert("update filters!!!!");
         listing_category = category;
         listing_sharetypes = sharetypes;
         clearMarkers();
-        addListingMarkers();
+        //addListingMarkers();
     }
 
     //google.maps.event.addDomListener(window, 'load', initialize);
