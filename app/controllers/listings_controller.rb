@@ -55,7 +55,6 @@ class ListingsController < ApplicationController
   
   # This function renders the map through AJAX request
   def loadmap
-    @listing_style = "map"
     respond_to do |format|
       format.js {render :layout => false}
    end
@@ -64,7 +63,6 @@ class ListingsController < ApplicationController
   
   # A (stub) method for serving M data (with locations) as JSON through AJAX-requests.
   def serve_listing_data
-    @listing_style = map
     unless params.has_key?(:bounds_sw) && params.has_key?(:bounds_ne) then
       # Send error JSON-message; these params are required
       render :json => { :errors => ["Parameters missing! bounds_sw and bounds_ne are required"]}
