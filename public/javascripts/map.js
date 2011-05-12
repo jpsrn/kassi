@@ -167,11 +167,11 @@
 
     // Simple callback for passing filter changes to the mapview
     function filtersUpdated(category, sharetypes) {
-        alert("update filters!!!!");
+        //alert("update filters!!!!");
         listing_category = category;
         listing_sharetypes = sharetypes;
         clearMarkers();
-        //addListingMarkers();
+        addListingMarkers();
     }
 
     //google.maps.event.addDomListener(window, 'load', initialize);
