@@ -24,23 +24,11 @@
       .tabs.grid_18.alpha
         .tabs.grid_12.alpha
           #inbox_tabs
-            %div{:class => get_map_tab_class(params[:listing_type]+ "s")} 
-              - if params[:listing_type] == "request"
-                = link_to t(".list_view"), requests_path
-              - else
-                = link_to t(".list_view"), offers_path            
-            %div{:class => get_map_tab_class(params[:listing_type]+ "s_on_map")} 
-              - if params[:listing_type] == "request" 
-                = link_to t(".map_view"), requests_on_map_path, :name => "map_view"
-              - else
-                = link_to t(".map_view"), offers_on_map_path, :name => "map_view"
-            %div{:class => "inbox_tab_unselected", :id => "ajaxmap"}
-              - if params[:listing_type] == "request" 
-                = link_to t(".test_map"), "#"
-              - else
-                = link_to t(".test_map"), "#"
+            %div{:class => "inbox_tab_selected", :id => "ajaxlist", :name => "map_view"}
+              = link_to t(".list_view"), "#"
+            %div{:class => "inbox_tab_unselected", :id => "ajaxmap", :name => "list_view"}
+              = link_to t(".map_view"), "#"
 
-        
         .grid_3.omega
                           
     .grid_8.omega

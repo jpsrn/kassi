@@ -160,7 +160,6 @@ Kassi::Application.routes.draw do
   match "/:locale/offers/map/" => "listings#offers_on_map", :as => :offers_on_map
   match "/:locale/requests/map/" => "listings#requests_on_map", :as => :requests_on_map
   match "/api/query" => "listings#serve_listing_data", :as => :listings_data
-  
 
   
   root :to => 'homepage#index'

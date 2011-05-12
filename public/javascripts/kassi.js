@@ -85,7 +85,7 @@ $.validator.
 function initialize_defaults(default_text, locale, feedback_default_text) {
 	$('input.search_field').watermark(default_text, {className: 'default_text'});
 	$("select.language_select").uniform();
-	$('#close_notification_link').click(function() { $('#notifications').slideUp('fast'); });
+	$('#close_notification_link').click(function() {$('#notifications').slideUp('fast');});
 	// Make sure that Kassi cannot be used if js is disabled
 	$('.wrapper').addClass('js_enabled');
 	initialize_feedback_tab();
@@ -125,9 +125,9 @@ function initialize_login_form() {
 }
 
 function initialize_new_listing_form(fileDefaultText, fileBtnText, locale, checkbox_message, date_message, is_rideshare, is_offer, listing_id) {
-	$('#help_tags_link').click(function() { $('#help_tags').lightbox_me({centered: true}); });
-	$('#help_share_type_link').click(function() { $('#help_share_type').lightbox_me({centered: true}); });
-	$('#help_valid_until_link').click(function() { $('#help_valid_until').lightbox_me({centered: true}); });
+	$('#help_tags_link').click(function() {$('#help_tags').lightbox_me({centered: true});});
+	$('#help_share_type_link').click(function() {$('#help_share_type').lightbox_me({centered: true});});
+	$('#help_valid_until_link').click(function() {$('#help_valid_until').lightbox_me({centered: true});});
 	$('input.title_text_field:first').focus();
 	$("select.listing_date_select, input[type=checkbox], input[type=file], input[type=radio]").uniform({
 		selectClass: 'selector2',
@@ -171,20 +171,20 @@ function initialize_new_listing_form(fileDefaultText, fileBtnText, locale, check
 			"listing[origin]": {required: true, minlength: 2},
 			"listing[destination]": {required: true, minlength: 2},
 			"listing[share_type_attributes][]": {required: true, minlength: 1},
-			"listing[listing_images_attributes][0][image]": { accept: "(jpe?g|gif|png)" },
-			"listing[valid_until(5i)]": { min_date: is_rideshare, max_date: is_rideshare },
-			"listing[valid_until(4i)]": { min_date: is_rideshare, max_date: is_rideshare },
-			"listing[valid_until(3i)]": { min_date: is_rideshare, max_date: is_rideshare },
-			"listing[valid_until(2i)]": { min_date: is_rideshare, max_date: is_rideshare },
-			"listing[valid_until(1i)]": { min_date: is_rideshare, max_date: is_rideshare }
+			"listing[listing_images_attributes][0][image]": {accept: "(jpe?g|gif|png)"},
+			"listing[valid_until(5i)]": {min_date: is_rideshare, max_date: is_rideshare},
+			"listing[valid_until(4i)]": {min_date: is_rideshare, max_date: is_rideshare},
+			"listing[valid_until(3i)]": {min_date: is_rideshare, max_date: is_rideshare},
+			"listing[valid_until(2i)]": {min_date: is_rideshare, max_date: is_rideshare},
+			"listing[valid_until(1i)]": {min_date: is_rideshare, max_date: is_rideshare}
 		},
 		messages: {
-			"listing[share_type_attributes][]": { required: checkbox_message },
-			"listing[valid_until(1i)]": { min_date: date_message, max_date: date_message },
-			"listing[valid_until(2i)]": { min_date: date_message, max_date: date_message  },
-			"listing[valid_until(3i)]": { min_date: date_message, max_date: date_message  },
-			"listing[valid_until(4i)]": { min_date: date_message, max_date: date_message  },
-			"listing[valid_until(5i)]": { min_date: date_message, max_date: date_message  }
+			"listing[share_type_attributes][]": {required: checkbox_message},
+			"listing[valid_until(1i)]": {min_date: date_message, max_date: date_message},
+			"listing[valid_until(2i)]": {min_date: date_message, max_date: date_message},
+			"listing[valid_until(3i)]": {min_date: date_message, max_date: date_message},
+			"listing[valid_until(4i)]": {min_date: date_message, max_date: date_message},
+			"listing[valid_until(5i)]": {min_date: date_message, max_date: date_message}
 		},
 		submitHandler: function(form) {
 		  disable_and_submit(form_id, form, locale, "false");
@@ -258,8 +258,8 @@ function initialize_give_feedback_form(locale, grade_error_message, text_error_m
 			"testimonial[text]": {required_when_not_neutral_feedback: true}
 		}, 
 		messages: {
-			"testimonial[grade]": { required: grade_error_message },
-			"testimonial[text]": { required_when_not_neutral_feedback: text_error_message }
+			"testimonial[grade]": {required: grade_error_message},
+			"testimonial[text]": {required_when_not_neutral_feedback: text_error_message}
 		},
 		submitHandler: function(form) {
 		  disable_and_submit(form_id, form, locale, "false");
@@ -268,8 +268,8 @@ function initialize_give_feedback_form(locale, grade_error_message, text_error_m
 }
 
 function initialize_signup_form(locale, username_in_use_message, invalid_username_message, email_in_use_message, captcha_message) {
-	$('#help_captcha_link').click(function() { $('#help_captcha').lightbox_me({centered: true}); });
-	$('#terms_link').click(function() { $('#terms').lightbox_me({centered: true}); });
+	$('#help_captcha_link').click(function() {$('#help_captcha').lightbox_me({centered: true});});
+	$('#terms_link').click(function() {$('#terms').lightbox_me({centered: true});});
 	$("input[type=checkbox]").uniform();
 	translate_validation_messages(locale);
 	var form_id = "#new_person"
@@ -289,14 +289,14 @@ function initialize_signup_form(locale, username_in_use_message, invalid_usernam
       "person[family_name]": {required: true, minlength: 2, maxlength: 30},
       "person[email]": {required: true, email: true, remote: "/people/check_email_availability"},
       "person[terms]": "required",
-      "person[password]": { required: true, minlength: 4 },
-      "person[password2]": { required: true, minlength: 4, equalTo: "#person_password" },
-			"recaptcha_response_field": {required: true, captcha: true }
+      "person[password]": {required: true, minlength: 4},
+      "person[password2]": {required: true, minlength: 4, equalTo: "#person_password"},
+			"recaptcha_response_field": {required: true, captcha: true}
 		},
 		messages: {
-		  "recaptcha_response_field": { captcha: captcha_message },
-			"person[username]": { valid_username: invalid_username_message, remote: username_in_use_message },
-			"person[email]": { remote: email_in_use_message }
+		  "recaptcha_response_field": {captcha: captcha_message},
+			"person[username]": {valid_username: invalid_username_message, remote: username_in_use_message},
+			"person[email]": {remote: email_in_use_message}
 		},
 		onkeyup: false, //Only do validations when form focus changes to avoid exessive ASI calls
 		submitHandler: function(form) {
@@ -306,7 +306,7 @@ function initialize_signup_form(locale, username_in_use_message, invalid_usernam
 }
 
 function initialize_terms_form() {
-	$('#terms_link').click(function() { $('#terms').lightbox_me({centered: true}); });
+	$('#terms_link').click(function() {$('#terms').lightbox_me({centered: true});});
 }
 
 function initialize_update_profile_info_form(locale, person_id) {
@@ -350,7 +350,7 @@ function initialize_update_avatar_form(fileDefaultText, fileBtnText, locale) {
 	var form_id = "#avatar_form";
 	$(form_id).validate({
 		rules: {
-			"file": { required: true, accept: "(jpe?g|gif|png)" } 
+			"file": {required: true, accept: "(jpe?g|gif|png)"} 
 		},
 		submitHandler: function(form) {
 		  disable_and_submit(form_id, form, locale, "true");
@@ -396,7 +396,7 @@ function initialize_update_account_info_form(locale, change_text, cancel_text, e
 			"person[email]": {required: true, email: true, remote: "/people/check_email_availability"}
 		},
 		messages: {
-			"person[email]": { remote: email_in_use_message }
+			"person[email]": {remote: email_in_use_message}
 		},
 		submitHandler: function(form) {
 		  disable_and_submit(email_form_id, form, locale, "false");
@@ -406,8 +406,8 @@ function initialize_update_account_info_form(locale, change_text, cancel_text, e
 	$(password_form_id).validate({
 		errorClass: "error_account",
 		rules: {
-			"person[password]": { required: true, minlength: 4 },
-			"person[password2]": { required: true, minlength: 4, equalTo: "#person_password" }
+			"person[password]": {required: true, minlength: 4},
+			"person[password2]": {required: true, minlength: 4, equalTo: "#person_password"}
 		},
 		submitHandler: function(form) {
 		  disable_and_submit(password_form_id, form, locale, "false");
@@ -415,11 +415,38 @@ function initialize_update_account_info_form(locale, change_text, cancel_text, e
 	});	
 }
 
+function handle_selected_tabs(link){
+
+        link.parent().parent().find('div').removeClass("inbox_tab_selected");
+        link.parent().parent().find('div').addClass("inbox_tab_unselected");
+        link.parent().removeClass();
+        link.parent().addClass('inbox_tab_selected');
+}
+
+function make_request_array(link){
+  // Make AJAX request based on selected items
+        allLinks = link.parent().parent().parent().parent().parent().parent().parent().find('a');
+
+        var sections = new Array();
+	var sectionTypes = ["categories","sharetypes"];
+	for (var i = 0; i < sectionTypes.length; i++) {
+		sections[sectionTypes[i]] = new Array();
+	}
+	allLinks.each(function() {
+		link_type = $(this).attr("name").split("_")[0];
+		link_title = $(this).attr("name").split("_")[1];
+		if ($(this).hasClass("selected")) {
+			sections[link_type].push(link_title);
+		}
+	});
+        return sections;
+}
+
 function reload_browse_view(link, listing_type, listing_style, locale) {
 	type = link.attr("name").split("_")[0];
 	title = link.attr("name").split("_")[1];
 	allLinks = link.parent().parent().find('a');
-	
+
 	// Handle selected items
 	if (type == "sharetypes") {
 		if (title == "all") {
@@ -465,18 +492,27 @@ function reload_browse_view(link, listing_type, listing_style, locale) {
 			sections[link_type].push(link_title);
 		}
 	});
+        
 	if (listing_style == "map")
 		//var request_path = '/' + locale + '/loadmap'
 		filtersUpdated(sections['categories'], sections['sharetypes']);
 	else {
 		var request_path = '/' + locale + '/load'
-		$.get(request_path, { listing_type: listing_type, 'category[]': sections['categories'], 'share_type[]': sections['sharetypes'] }, function(data) {
+		$.get(request_path, {listing_type: listing_type, 'category[]': sections['categories'], 'share_type[]': sections['sharetypes']}, function(data) {
 			$('#search_results').html(data);
 		});
 	}
 }
 
- function initialize_browse_view(listing_type, listing_style, locale) {
+ /* Global variable for listing style state  */
+ var listing_type;
+ var listing_style;
+
+
+ 
+ function initialize_browse_view(listingtype, listingstyle, locale) {
+       listing_type = listingtype;
+       listing_style = listingstyle;
        $('#left_link_panel_browse').find('a').click(
                function() {
                        if (listing_style == 'listing') {
@@ -487,14 +523,22 @@ function reload_browse_view(link, listing_type, listing_style, locale) {
        );
        $('#ajaxmap').find('a').click(
                function() {
-                       if (listing_style == 'listing') {
-                       		$("#search_results").html('<div id="loader"><img src="/images/load.gif" title="load" alt="loading more results" style="margin: 10px auto" /></div>');
-                       }
                        var request_path = '/' + locale + '/loadmap'
                         $.get(request_path, function(data) {
-                            //alert("success on jquery get");
-                            //$('#map_canvas').html(data);
+                           //whatever;
                         });
+                        handle_selected_tabs($(this));
+               }
+       );
+       $('#ajaxlist').find('a').click(
+               function() {
+                       var request_array = make_request_array($(this));
+                       var request_path = '/' + locale + '/load'
+                        $.get(request_path, {listing_type: listing_type, 'category[]': request_array['categories'], 'share_type[]': request_array['sharetypes']}, function(data) {
+                          $('#search_results').html(data);
+                        });
+                        handle_selected_tabs($(this));
+                       
                }
        );
 }
@@ -508,7 +552,7 @@ function initialize_profile_view(badges) {
 		$('#profile_description_preview').show();
 		$('#profile_description_full').hide(); 
 	});
-	$('#badges_description_link').click(function() { $('#badges_description').lightbox_me({centered: true}); });
+	$('#badges_description_link').click(function() {$('#badges_description').lightbox_me({centered: true});});
 	for (var i = 0; i < badges.length; i++) {
 		$('#' + badges[i] + '_description_link').click(function(badge) {
 			$('#' + badge.currentTarget.id + '_target').lightbox_me({centered: true});
@@ -517,7 +561,7 @@ function initialize_profile_view(badges) {
 }
 
 function initialize_profile_feedback_view() {
-	$('#help_feedback_link').click(function() { $('#feedback_description').lightbox_me({centered: true}); });
+	$('#help_feedback_link').click(function() {$('#feedback_description').lightbox_me({centered: true});});
 }
 
 function translate_validation_messages(locale) {

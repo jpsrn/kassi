@@ -9,12 +9,11 @@
     var helsinki;
     var browserSupportFlag =  new Boolean();
     var markersArr = [];   // Array for keeping track of markers on map
-    var listing_type = "#{params[:listing_type]}";
-    var listing_style = "#{@listing_style}";
+    var listing_style;
     var listing_category = ["all"];
     var listing_sharetypes = ["all"];
 
-   
+
     function initialize() {
       helsinki = new google.maps.LatLng(60.2, 24.9);
       var myOptions = {
@@ -76,13 +75,12 @@
 
 
     function addListingMarkers() {
-      alert("inside add markers");
       // Test requesting location data
       // Now the request_path needs to also have a query string with the wanted parameters
       var bounds = map.getBounds();
       var sw = bounds.getSouthWest();
       var ne = bounds.getNorthEast();
-
+      
       var request_path = '/api/query'
     	$.get(request_path, { listing_type: listing_type, 'category[]': listing_category, 'share_type[]': listing_sharetypes,
     	                      bounds_sw: sw.lat().toString() + '|' + sw.lng().toString(),
@@ -92,12 +90,12 @@
     	  var data_arr = data["data"];
     	  var infowindow = new google.maps.InfoWindow();
     	  var directionsService = new google.maps.DirectionsService();
-        var directionsDisplay = new google.maps.DirectionsRenderer();
-        directionsDisplay.setOptions( { suppressMarkers: true } );
-        var flagMarker = new google.maps.Marker();
-        var markers = [];
-        var markerContents = [];
-        var showingMarker = [];
+          var directionsDisplay = new google.maps.DirectionsRenderer();
+          directionsDisplay.setOptions( { suppressMarkers: true } );
+          var flagMarker = new google.maps.Marker();
+          var markers = [];
+          var markerContents = [];
+          var showingMarker = [];
     		for (i in data_arr) {
     		  (function() {
     		    var entry = data_arr[i];

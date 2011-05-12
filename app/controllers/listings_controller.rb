@@ -53,17 +53,22 @@ class ListingsController < ApplicationController
   end 
   
   def loadmap
-   # @to_render ||= {:partial => "listings/dummy_partial"}
-   # render  @to_render
+    @listing_style = "map"
     respond_to do |format|
-   #   format.html
       format.js {render :layout => false}
    end
-   #render :layout => false
+  end
+
+  def loadlist
+    @listing_style = "listing"
+    respond_to do |format|
+      format.js {render :layout => false}
+   end
   end
 
   # The following two are simple dummy implementations duplicating the
   # functionality of normal listing methods.
+  # currently not in use
   def requests_on_map
     params[:listing_type] = "request"
     @to_render = {:action => :index}
@@ -80,7 +85,7 @@ class ListingsController < ApplicationController
   end
   
   
-  # A (stub) method for serving Listing data (with locations) as JSON through AJAX-requests.
+  # A (stub) method for serving M data (with locations) as JSON through AJAX-requests.
   def serve_listing_data
     unless params.has_key?(:bounds_sw) && params.has_key?(:bounds_ne) then
       # Send error JSON-message; these params are required
@@ -115,7 +120,7 @@ class ListingsController < ApplicationController
     end
     render :json => { :info => @render_array, :data => @listings }
   end
-
+  
   def show
     @listing.increment!(:times_viewed)
   end
