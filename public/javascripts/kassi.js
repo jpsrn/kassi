@@ -423,9 +423,27 @@ function handle_selected_tabs(link){
         link.parent().addClass('inbox_tab_selected');
 }
 
+function get_selected_filters(){
+  // Make AJAX request to get selected filters
+  var allLinks = $('#left_link_panel_browse').find('a');
+  var sections = new Array();
+	var sectionTypes = ["categories","sharetypes"];
+	for (var i = 0; i < sectionTypes.length; i++) {
+		sections[sectionTypes[i]] = new Array();
+	}
+	allLinks.each(function() {
+		link_type = $(this).attr("name").split("_")[0];
+		link_title = $(this).attr("name").split("_")[1];
+		if ($(this).hasClass("selected")) {
+			sections[link_type].push(link_title);
+		}
+	});
+  return sections;
+}
+
 function make_request_array(link){
   // Make AJAX request based on selected items
-        allLinks = link.parent().parent().parent().parent().parent().parent().parent().find('a');
+       var allLinks = link.parent().parent().parent().parent().parent().parent().parent().find('a');
 
         var sections = new Array();
 	var sectionTypes = ["categories","sharetypes"];
@@ -532,7 +550,8 @@ function reload_browse_view(link, listing_type, listing_style, locale) {
        $('#ajaxlist').find('a').click(
                function() {
                        $("#search_results").html('<div id="loader"><img src="/images/load.gif" title="load" alt="loading more results" style="margin: 10px auto" /></div>');
-                       var request_array = make_request_array($(this));
+                       //var request_array = make_request_array($(this));
+                       var request_array = get_selected_filters();
                        var request_path = '/' + locale + '/load'
                         $.get(request_path, {listing_type: listing_type, 'category[]': request_array['categories'], 'share_type[]': request_array['sharetypes']}, function(data) {
                           $('#search_results').html(data);
